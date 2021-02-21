@@ -6,6 +6,8 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+import org.web3j.crypto.Hash;
+
 /**
  * This is a specific laboratory result which can be notarized on the
  * GenoBank.io platform by a permitee.
@@ -78,17 +80,6 @@ public class PermitteeRepresentations {
     this.time = time;
   }
 
-  public String getTightSerialization() {
-    return String.join("|", new String[]{
-      patientName,
-      patientPassport,
-      procedure.code,
-      result.code,
-      serial,
-      time.getEpochSecond()+""
-    });
-  }
-
   public String getFullSerialization() {
     /*
     DateTimeFormatter ISO8601 = DateTimeFormatter
@@ -107,4 +98,19 @@ public class PermitteeRepresentations {
     });
   }
 
+  public String getTightSerialization() {
+    return String.join("|", new String[]{
+      patientName,
+      patientPassport,
+      procedure.code,
+      result.code,
+      serial,
+      time.getEpochSecond()+""
+    });  
+  }  
+
+  public byte[] getClaim() {
+    //TODO:  SEE notes on signing, padding, etc. https://github.com/web3j/web3j/issues/208
+    return Hash.sha3(getTightSerialization()).getBytes() ;
+  }
 }

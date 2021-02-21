@@ -11,7 +11,7 @@ import org.web3j.utils.Numeric;
  */
 public class Main {
   public static void main(String[] args) throws IllegalArgumentException {    
-    if (args.length != 8) {
+    if (args.length != 9) {
       showHelp();
       return;
     }
@@ -37,32 +37,36 @@ public class Main {
         throw new IllegalArgumentException("You must specify --test or --production network");
     }
 
-    PermitteeSigner signer = new PermitteeSigner(args[1]);
     System.out.println("Loading account from TWELVE_WORD_PHRASE");
-    System.out.println("Account:     " + signer.credentials.getAddress());
+    PermitteeSigner signer = new PermitteeSigner(args[1], Integer.parseInt(args[2]));
+    System.out.println("Address:     " + signer.credentials.getAddress());
     System.out.println();
     
+    System.out.println("Preparing representations");
     PermitteeRepresentations representations = new PermitteeRepresentations(
       network,
-      args[2], // Patient name
-      args[3], // Patient passport
-      LaboratoryProcedure.procedureWithCode(args[4]), // Laboratory procedure
-      LaboratoryProcedure.procedureWithCode(args[4]).resultWithCode(args[5]),
-      args[6], // Serial
-      Instant.ofEpochSecond(Integer.parseInt(args[7])) // Time
+      args[3], // Patient name
+      args[4], // Patient passport
+      LaboratoryProcedure.procedureWithCode(args[5]), // Laboratory procedure
+      LaboratoryProcedure.procedureWithCode(args[5]).resultWithCode(args[6]),
+      args[7], // Serial
+      Instant.ofEpochSecond(Integer.parseInt(args[8])) // Time
       );
-    System.out.println("Preparing representations");
     System.out.println("Tight:       " + representations.getTightSerialization());
     System.out.println("Full:        " + representations.getFullSerialization());
+    System.out.println("Claim:       " + representations.getClaim());
     System.out.println();
-    
-    byte[] signature = signer.sign(representations);
+
     System.out.println("Signing");
+    byte[] signature = signer.sign(representations);
     System.out.println("Signature:   " + Numeric.toHexString(signature));
     System.out.println();
     
-    Platform platform = new Platform(network);
+    System.out.println("Posting to API server");
+    Platform platform = new Platform(network, signer);
     NotarizedCertificate certificate = platform.notarize(representations, signature);
+
+    System.out.println();
     System.out.println("Certificate URL");
     System.out.println(certificate.toURL());
   }
@@ -81,6 +85,7 @@ public class Main {
     System.out.println("    Running on the production network is billable per your laboratory agreement.");
     System.out.println();
     System.out.println("    TWELVE_WORD_PHRASE a space-separated string of your twelve word phrase");
+    System.out.println("    PERMITTEE_ID       your GenoBank.io permittee identifier");
     System.out.println("    PATIENT_NAME       must match [A-Za-z0-9 .-]+");
     System.out.println("    PATIENT_PASSPORT   must match [A-Z0-9 -]+");
     System.out.println("    PROCEDURE_CODE     must be a procedure key in the Laboratory Procedure Taxonomy");
