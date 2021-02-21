@@ -1,3 +1,6 @@
+- [ ] Handle all TODOS
+- [ ] Remove unused imports
+
 # :warning: PROJECT STATUS: Alpha :warning:
 
 # Blockchain Lab Results Certification
@@ -46,7 +49,7 @@ java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar
 Or include all required parameters to notarize a certificate
 
 ```sh
-java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'NAME' 'PASS123' '1' 'N' '' 1611517330
+java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' 'NAME' 'PASS123' '1' 'N' '' 1611517330
 ```
 
 ## Overview
