@@ -73,7 +73,7 @@ public class Main {
   public static void showHelp() {
     System.err.println("Blockchain Lab Results Certification");
     System.err.println("Java Certification Example, version 1.0");
-    System.err.println("(c) GenoBank.io");
+    System.err.println("(c) GenoBank.io 🧬");
     System.err.println();
     System.err.println("SYNOPSIS");
     System.err.println("    certificates --test TWELVE_WORD_PHRASE PATIENT_NAME PATIENT_PASSPORT PROCEDURE_CODE RESULT_CODE SERIAL TIMESTAMP");
