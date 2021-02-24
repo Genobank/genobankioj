@@ -1,5 +1,8 @@
 - [ ] Handle all TODOS
 - [ ] Remove unused imports
+- [ ] 
+- [ ] Create error code path in case server denies
+- [ ] Internationalize/localize
 
 # :warning: PROJECT STATUS: Alpha :warning:
 
