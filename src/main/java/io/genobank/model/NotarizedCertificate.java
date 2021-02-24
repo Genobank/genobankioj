@@ -26,21 +26,26 @@ public class NotarizedCertificate {
 
   public final byte[] notarizedSignature;
 
+  public final byte[] txHash;
+
   NotarizedCertificate(
     PermitteeRepresentations permitteeRepresentations,
     byte[] permiteeSignature,
     java.time.Instant notarizedTime,
-    byte[] notarizedSignature
+    byte[] notarizedSignature,
+    byte[] txHash
   ) {
     java.util.Objects.requireNonNull(permitteeRepresentations);
     java.util.Objects.requireNonNull(permiteeSignature);
     java.util.Objects.requireNonNull(notarizedTime);
     java.util.Objects.requireNonNull(notarizedSignature);
+    java.util.Objects.requireNonNull(txHash);
 
     this.permitteeRepresentations = permitteeRepresentations;
     this.permitteeSignature = permiteeSignature;
     this.notarizedTime = notarizedTime;
     this.notarizedSignature = notarizedSignature;
+    this.txHash = txHash;
     this.network = permitteeRepresentations.network;
   }
 
@@ -48,8 +53,9 @@ public class NotarizedCertificate {
     return String.join("|", new String[]{
       permitteeRepresentations.getTightSerialization(),
       Numeric.toHexString(permitteeSignature),
-      notarizedTime.getEpochSecond()+"",
-      Numeric.toHexString(notarizedSignature)
+      notarizedTime.toEpochMilli() + "",
+      Numeric.toHexString(notarizedSignature),
+      Numeric.toHexString(txHash)
     });
   }
 

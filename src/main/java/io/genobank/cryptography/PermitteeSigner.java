@@ -1,6 +1,7 @@
 package io.genobank;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 
 import org.web3j.crypto.Bip32ECKeyPair;
 import org.web3j.crypto.Credentials;
@@ -28,32 +29,15 @@ public class PermitteeSigner {
   }
 
   public byte[] sign(PermitteeRepresentations representations) {
-    String password = null;
-    String mnemonic = "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
-    byte[] claim = representations.getClaim();
+    byte[] message = representations.getFullSerialization().getBytes(StandardCharsets.UTF_8);
+    Sign.SignatureData signature = Sign.signPrefixedMessage(message, credentials.getEcKeyPair());
 
-    // How to load an Ethereum wallet explained at https://gitter.im/web3j/web3j?at=5cb437ba31aec969e8aaed08
-    // Test case https://www.trufflesuite.com/docs/truffle/getting-started/using-truffle-develop-and-the-console
-    Bip32ECKeyPair masterKeypair = Bip32ECKeyPair.generateKeyPair(MnemonicUtils.generateSeed(mnemonic, password));
-    int[] path = {44 | HARDENED_BIT, 60 | HARDENED_BIT, 0 | HARDENED_BIT, 0,0};
-    Bip32ECKeyPair x = Bip32ECKeyPair.deriveKeyPair(masterKeypair, path);
-    Credentials credentials = Credentials.create(x);
-    System.out.println("Address:     " + credentials.getAddress());
-
-    // Sign
-    Sign.SignatureData signature = Sign.signPrefixedMessage(claim, credentials.getEcKeyPair());
-    System.out.println("R:           " + Numeric.toHexString(signature.getR()));
-    System.out.println("S:           " + Numeric.toHexString(signature.getS()));
-    System.out.println("V:           " + Numeric.toHexString(signature.getV()));
-
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    try {
-      outputStream.write(signature.getR());
-      outputStream.write(signature.getS());
-      outputStream.write(signature.getV());
-    } catch (java.io.IOException exception) {
-      throw new RuntimeException("ByteArrayOutputStream should not be this difficult");
-    }
-    return outputStream.toByteArray();
+    // Match the signature output format as Ethers.js v5.0.31
+    // https://github.com/ethers-io/ethers.js/blob/v5.0.31/packages/bytes/src.ts/index.ts#L444-L448
+    byte[] retval = new byte[65];
+    System.arraycopy(signature.getR(), 0, retval, 0, 32);
+    System.arraycopy(signature.getS(), 0, retval, 32, 32);
+    System.arraycopy(signature.getV(), 0, retval, 64, 1);
+    return retval;
   }
 }

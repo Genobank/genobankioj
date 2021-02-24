@@ -1,5 +1,6 @@
 package io.genobank;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -7,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 import org.web3j.crypto.Hash;
+import org.web3j.crypto.Sign;
 
 /**
  * This is a specific laboratory result which can be notarized on the
@@ -22,17 +24,19 @@ public class PermitteeRepresentations {
   
   public final Network network;
 
-  private final String patientName;
+  public final String patientName;
 
-  private final String patientPassport;
+  public final String patientPassport;
 
-  private final LaboratoryProcedure procedure;
+  public final LaboratoryProcedure procedure;
   
-  private final LaboratoryProcedureResult result;
+  public final LaboratoryProcedureResult result;
   
-  private final String serial;
+  public final String serial;
 
-  private final java.time.Instant time;
+  public final java.time.Instant time;
+
+  public final Integer permitteeId;
 
   public PermitteeRepresentations(
     Network network,
@@ -41,7 +45,8 @@ public class PermitteeRepresentations {
     LaboratoryProcedure procedure,
     LaboratoryProcedureResult result,
     String serial,
-    java.time.Instant time
+    java.time.Instant time,
+    Integer permitteeId
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -78,6 +83,9 @@ public class PermitteeRepresentations {
       throw new IllegalArgumentException("Time is too early, it is before 2021-01-01");
     }
     this.time = time;
+
+    // Permittee ID
+    this.permitteeId = permitteeId;
   }
 
   public String getFullSerialization() {
@@ -94,7 +102,8 @@ public class PermitteeRepresentations {
       procedure.internationalName,
       result.internationalName,
       serial,
-      DateTimeFormatter.ISO_INSTANT.format(time)
+      DateTimeFormatter.ISO_INSTANT.format(time),
+      permitteeId + ""
     });
   }
 
@@ -105,12 +114,14 @@ public class PermitteeRepresentations {
       procedure.code,
       result.code,
       serial,
-      time.getEpochSecond()+""
+      time.toEpochMilli() + "",
+      permitteeId + ""
     });  
   }  
 
   public byte[] getClaim() {
-    //TODO:  SEE notes on signing, padding, etc. https://github.com/web3j/web3j/issues/208
-    return Hash.sha3(getTightSerialization()).getBytes() ;
+    return Sign.getEthereumMessageHash(getFullSerialization().getBytes(StandardCharsets.UTF_8));
+//    byte[] message = getFullSerialization().getBytes(StandardCharsets.UTF_8);
+//    return Hash.sha3(message);
   }
 }
