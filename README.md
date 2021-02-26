@@ -1,11 +1,3 @@
-- [ ] Handle all TODOS
-- [ ] Remove unused imports
-- [ ] 
-- [ ] Create error code path in case server denies
-- [ ] Internationalize/localize
-
-# :warning: PROJECT STATUS: Alpha :warning:
-
 # Blockchain Lab Results Certification
 
 This project demonstrates how to notarize one lab result certification on the blockchain with GenoBank.io. This is written in Java and is portable to Apache Tomcat, command line and other web environments.
