@@ -76,8 +76,8 @@ public class Main {
     System.err.println("(c) GenoBank.io 🧬");
     System.err.println();
     System.err.println("SYNOPSIS");
-    System.err.println("    certificates --test TWELVE_WORD_PHRASE PATIENT_NAME PATIENT_PASSPORT PROCEDURE_CODE RESULT_CODE SERIAL TIMESTAMP");
-    System.err.println("    certificates --production PATIENT_NAME PATIENT_PASSPORT PROCEDURE_CODE RESULT_CODE SERIAL TIMESTAMP");
+    System.err.println("    certificates --test TWELVE_WORD_PHRASE PERMITTEE_ID PATIENT_NAME PATIENT_PASSPORT PROCEDURE_CODE RESULT_CODE SERIAL TIMESTAMP");
+    System.err.println("    certificates --production TWELVE_WORD_PHRASE PERMITTEE_ID PATIENT_NAME PATIENT_PASSPORT PROCEDURE_CODE RESULT_CODE SERIAL TIMESTAMP");
     System.err.println();
     System.err.println("DESCRIPTION");
     System.err.println("    This notarizes a laboratory result using the GenoBank.io platform.");
