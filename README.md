@@ -21,6 +21,18 @@ sequenceDiagram
      4. `brew install maven`
      5. `brew install openjdk`
 
+## Downloading
+
+Get the latest source code from GitHub
+
+```sh
+cd ~
+mkdir -p Developer
+cd Developer
+git clone https://github.com/Genobank/genobankj.git
+cd genobankj
+```
+
 ## Building and testing
 
 Prepare your Maven project build state
