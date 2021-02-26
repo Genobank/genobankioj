@@ -2,6 +2,14 @@
 
 This project demonstrates how to notarize one lab result certification on the blockchain with GenoBank.io. This is written in Java and is portable to Apache Tomcat, command line and other web environments.
 
+```mermaid
+sequenceDiagram
+    Java->>+api.genobank.io: {"claim":..., "signature":..., "permitteeSerial":...}
+    api.genobank.io->>+Java: {"txHash":..., "timestamp":..., "genobankSignature":...}
+```
+
+
+
 ## Prerequisites
 
 1. Supported operating systems are macOS, Linux and Windows
