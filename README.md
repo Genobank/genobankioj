@@ -64,8 +64,10 @@ java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar
 Or include all required parameters to notarize a certificate
 
 ```sh
-java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' 'NAME' 'PASS123' '1' 'N' '' 1611517330
+java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' 1 'NAME' 'PASS123' '1' 'N' '' 1611517330
 ```
+
+(Test account at https://github.com/Genobank/genobank.io/wiki/Test-Accounts-and-Certificates)
 
 ## Overview
 
