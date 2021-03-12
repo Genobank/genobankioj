@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.regex.Pattern;
 
 import org.web3j.crypto.Hash;
@@ -89,11 +90,9 @@ public class PermitteeRepresentations {
   }
 
   public String getFullSerialization() {
-    /*
-    DateTimeFormatter ISO8601 = DateTimeFormatter
-      .ofPattern("yyyy-MM-dd\\THH:mm:ss\\Z")
-      .withZone(ZoneOffset.UTC);
-      */
+    DateTimeFormatter isoInstantWithMilliseconds = new DateTimeFormatterBuilder()
+        .appendInstant(3)
+        .toFormatter();
 
     return String.join("|", new String[]{
       network.namespacePrefix + namespaceSuffix,
@@ -102,7 +101,7 @@ public class PermitteeRepresentations {
       procedure.internationalName,
       result.internationalName,
       serial,
-      DateTimeFormatter.ISO_INSTANT.format(time),
+      isoInstantWithMilliseconds.format(time),
       permitteeId + ""
     });
   }
