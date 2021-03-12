@@ -31,8 +31,10 @@ public class LaboratoryProcedure {
     switch (code) {
       case "N":
         return new LaboratoryProcedureResult("N", "NEGATIVE");
+      case "P":
+        return new LaboratoryProcedureResult("P", "POSITIVE");
       default:
-        throw new IllegalArgumentException("Only laboratory result N=NEGATIVE is supported in this version");
+        throw new IllegalArgumentException("Only laboratory result N=NEGATIVE and P=POSITIVE is supported in this version");
     }
   }
 
