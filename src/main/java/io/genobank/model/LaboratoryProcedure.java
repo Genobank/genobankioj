@@ -1,5 +1,6 @@
 package io.genobank;
 
+/// @see https://genobank.io/certificates/laboratoryProcedureTaxonomy.json
 public class LaboratoryProcedure {
   /** A succinct code used in the tight serialization */
   public final String code;
@@ -22,8 +23,12 @@ public class LaboratoryProcedure {
     switch (code) {
       case "1":
         return new LaboratoryProcedure("1", "COVID-19-PCR");
+      case "2":
+        return new LaboratoryProcedure("2", "COVID-19-ANTIGEN");
+      case "3":
+        return new LaboratoryProcedure("3", "COVID-19-LAMP");
       default:
-        throw new IllegalArgumentException("Only laboratory procedure 1=COVID-19-PCR is supported in this version");
+        throw new IllegalArgumentException("Only laboratory procedure 1=COVID-19-PCR, 2=COVID-19-ANTIGEN and 3=COVID-19-LAMP are supported in this version");
     }
   }
 
