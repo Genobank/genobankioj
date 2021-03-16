@@ -19,18 +19,18 @@ public enum Network {
   public final String namespacePrefix;
   public final URI certificateUrlBase;
   public final URI apiUrlBase;
-  public final String genoBankAddress;
+  public final String genoBankIoAddress;
 
   private Network(
     String namespacePrefix,
     String certificateUrlBase,
     String apiUrlBase,
-    String genoBankAddress) {
+    String genoBankIoAddress) {
     try {
       this.namespacePrefix = namespacePrefix;
       this.certificateUrlBase = URI.create(certificateUrlBase);
       this.apiUrlBase = URI.create(apiUrlBase);
-      this.genoBankAddress = genoBankAddress;
+      this.genoBankIoAddress = genoBankIoAddress;
     } catch(Exception exception) {
       throw new RuntimeException("URI base error");
     }
