@@ -78,10 +78,6 @@ java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'can
 * `NotarizedCertificate` is the notarized artifact.
 * `Main` is the program entry point.
 
-Notes:
-
-* Currently only COVID-19-PCR testing and NEGATIVE test results are supported in this program.
-
 ## Extending
 
 You are welcome to extend the functionality of this example, for example to connect to an ERP system or add additional information (like birthday) into the name field.
