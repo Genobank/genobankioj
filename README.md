@@ -58,13 +58,13 @@ After you have made any changes, run the build command above.
 Run the product without arguments to see instructions
 
 ```sh
-java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/*.jar --test
 ```
 
 Or include all required parameters to notarize a certificate
 
 ```sh
-java -jar target/certificates-1.0-SNAPSHOT-jar-with-dependencies.jar --test 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' 1 'NAME' 'PASS123' '1' 'N' '' 1611517330
+java -jar target/*.jar --test 'wrong outside clever wagon father insane boy junk punch duck drift cupboard' 41 'Bob' '1234' '1' 'N' '' 1614069145429
 ```
 
 (Test account at https://github.com/Genobank/genobank.io/wiki/Test-Accounts-and-Certificates)
