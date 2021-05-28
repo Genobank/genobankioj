@@ -74,7 +74,7 @@ public class PermitteeRepresentations {
     this.result = result;
     
     // Serial number
-    if (!Pattern.matches("[A-Z0-9 -]*", patientPassport)) {
+    if (!Pattern.matches("[A-Z0-9 -]*", serial)) {
       throw new IllegalArgumentException("Serial does not use required format");
     }
     this.serial = serial;
