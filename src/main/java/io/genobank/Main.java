@@ -18,7 +18,7 @@ public class Main {
     }
     
     System.err.println("Blockchain Lab Results Certification");
-    System.err.println("Java Certification Example, version 1.0");
+    System.err.println("Java Certification Example, version 1.1");
     System.err.println("(c) GenoBank.io 🧬");
     System.err.println();
 
@@ -72,7 +72,7 @@ public class Main {
       
   public static void showHelp() {
     System.err.println("Blockchain Lab Results Certification");
-    System.err.println("Java Certification Example, version 1.0");
+    System.err.println("Java Certification Example, version 1.1");
     System.err.println("(c) GenoBank.io 🧬");
     System.err.println();
     System.err.println("SYNOPSIS");

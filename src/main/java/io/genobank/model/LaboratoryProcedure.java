@@ -27,8 +27,12 @@ public class LaboratoryProcedure {
         return new LaboratoryProcedure("2", "COVID-19-ANTIGEN");
       case "3":
         return new LaboratoryProcedure("3", "COVID-19-LAMP");
+      case "4":
+        return new LaboratoryProcedure("4", "COVID-19-VACCINE");
+      case "5":
+        return new LaboratoryProcedure("5", "SARS-CoV-2-IgG");
       default:
-        throw new IllegalArgumentException("Only laboratory procedure 1=COVID-19-PCR, 2=COVID-19-ANTIGEN and 3=COVID-19-LAMP are supported in this version");
+        throw new IllegalArgumentException("Only laboratory procedure 1=COVID-19-PCR, 2=COVID-19-ANTIGEN, 3=COVID-19-LAMP 4=COVID-19-VACCINE, 5=SARS-CoV-2-IgG are supported in this version");
     }
   }
 
@@ -38,8 +42,10 @@ public class LaboratoryProcedure {
         return new LaboratoryProcedureResult("N", "NEGATIVE");
       case "P":
         return new LaboratoryProcedureResult("P", "POSITIVE");
+      case "C":
+        return new LaboratoryProcedureResult("C", "COMPLETE");
       default:
-        throw new IllegalArgumentException("Only laboratory result N=NEGATIVE and P=POSITIVE is supported in this version");
+        throw new IllegalArgumentException("Only laboratory result N=NEGATIVE, P=POSITIVE and C=COMPLETE are supported in this version");
     }
   }
 
