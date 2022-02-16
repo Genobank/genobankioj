@@ -39,6 +39,8 @@ public class PermitteeRepresentations {
 
   public final Integer permitteeId;
 
+  public final String imageUri;
+
   public PermitteeRepresentations(
     Network network,
     String patientName,
@@ -47,7 +49,8 @@ public class PermitteeRepresentations {
     LaboratoryProcedureResult result,
     String serial,
     java.time.Instant time,
-    Integer permitteeId
+    Integer permitteeId,
+    String imageUri
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -87,6 +90,12 @@ public class PermitteeRepresentations {
 
     // Permittee ID
     this.permitteeId = permitteeId;
+
+    // Image URI
+    if (!Pattern.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", imageUri)) {
+      throw new IllegalArgumentException("imageUri does not use required format");
+    }
+    this.imageUri = imageUri;
   }
 
   public String getFullSerialization() {
@@ -102,7 +111,8 @@ public class PermitteeRepresentations {
       result.internationalName,
       serial,
       isoInstantWithMilliseconds.format(time),
-      permitteeId + ""
+      permitteeId + "",
+      imageUri
     });
   }
 

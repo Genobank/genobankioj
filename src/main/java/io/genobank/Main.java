@@ -12,7 +12,7 @@ import org.web3j.crypto.Keys;
  */
 public class Main {
   public static void main(String[] args) throws IllegalArgumentException {    
-    if (args.length != 9) {
+    if (args.length != 10) {
       showHelp();
       return;
     }
@@ -47,7 +47,8 @@ public class Main {
       LaboratoryProcedure.procedureWithCode(args[5]).resultWithCode(args[6]),
       args[7], // Serial
       Instant.ofEpochMilli(Long.parseLong(args[8])), // Time
-      signer.permitteeId // Permittee ID
+      signer.permitteeId, // Permittee ID
+      args[9] // Image URI
     );
 
     System.err.println("Patient:     " + ConsoleColors.YELLOW + representations.patientName + ConsoleColors.RESET);
@@ -56,6 +57,8 @@ public class Main {
     System.err.println("Result:      " + ConsoleColors.YELLOW + representations.result.code + ConsoleColors.RESET);
     System.err.println("Serial:      " + ConsoleColors.YELLOW + representations.serial + ConsoleColors.RESET);
     System.err.println("Time:        " + ConsoleColors.YELLOW + representations.time.toEpochMilli() + "" + ConsoleColors.RESET);
+    System.err.println("imageUrl:     " + ConsoleColors.YELLOW + representations.imageUri + ConsoleColors.RESET);
+
 
     byte[] signature = signer.sign(representations);
     System.err.println("Signature:   " + ConsoleColors.YELLOW + Numeric.toHexString(signature) + ConsoleColors.RESET);
