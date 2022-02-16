@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 import org.web3j.crypto.Hash;
 import org.web3j.crypto.Sign;
 
+import org.json.JSONObject;
+
 /**
  * This is a specific laboratory result which can be notarized on the
  * GenoBank.io platform by a permitee.
@@ -41,6 +43,8 @@ public class PermitteeRepresentations {
 
   public final String imageUri;
 
+  public final String jsonData;
+
   public PermitteeRepresentations(
     Network network,
     String patientName,
@@ -50,7 +54,8 @@ public class PermitteeRepresentations {
     String serial,
     java.time.Instant time,
     Integer permitteeId,
-    String imageUri
+    String imageUri,
+    String jsonData
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -96,6 +101,14 @@ public class PermitteeRepresentations {
       throw new IllegalArgumentException("imageUri does not use required format");
     }
     this.imageUri = imageUri;
+
+    // format string to JSON and convert to String to be stored in the database
+    try {
+        JSONObject json = new JSONObject(jsonData);
+        this.jsonData = json.toString();
+    } catch (Exception e) {
+        throw new IllegalArgumentException("jsonData does not use required format");
+    }
   }
 
   public String getFullSerialization() {
@@ -112,7 +125,8 @@ public class PermitteeRepresentations {
       serial,
       isoInstantWithMilliseconds.format(time),
       permitteeId + "",
-      imageUri
+      imageUri,
+      jsonData
     });
   }
 
