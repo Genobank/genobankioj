@@ -102,7 +102,7 @@ public class PermitteeRepresentations {
     }
     this.imageUri = imageUri;
 
-    // format string to JSON and convert to String to be stored in the database
+    // JSON data
     try {
         JSONObject json = new JSONObject(jsonData);
         this.jsonData = json.toString();
