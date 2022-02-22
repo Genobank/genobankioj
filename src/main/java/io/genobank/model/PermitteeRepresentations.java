@@ -138,7 +138,9 @@ public class PermitteeRepresentations {
       result.code,
       serial,
       time.toEpochMilli() + "",
-      permitteeId + ""
+      permitteeId + "",
+      imageUri,
+      jsonData
     });  
   }  
 
