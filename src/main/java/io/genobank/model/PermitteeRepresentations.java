@@ -41,9 +41,9 @@ public class PermitteeRepresentations {
 
   public final Integer permitteeId;
 
-  public final String imageUri;
+  public final String jsonPassport;
 
-  public final String jsonData;
+  public final String jsonVaccineData;
 
   public PermitteeRepresentations(
     Network network,
@@ -54,8 +54,8 @@ public class PermitteeRepresentations {
     String serial,
     java.time.Instant time,
     Integer permitteeId,
-    String imageUri,
-    String jsonData
+    String jsonPassport,
+    String jsonVaccineData
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -96,16 +96,18 @@ public class PermitteeRepresentations {
     // Permittee ID
     this.permitteeId = permitteeId;
 
-    // Image URI
-    if (!Pattern.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", imageUri)) {
-      throw new IllegalArgumentException("imageUri does not use required format");
-    }
-    this.imageUri = imageUri;
-
-    // JSON data
+    // jsonPassport
     try {
-        JSONObject json = new JSONObject(jsonData);
-        this.jsonData = json.toString();
+        JSONObject json = new JSONObject(jsonPassport);
+        this.jsonPassport = json.toString();
+    } catch (Exception e) {
+        throw new IllegalArgumentException("jsonPassport does not use required format");
+    }
+
+    // jsonVaccineData
+    try {
+        JSONObject json = new JSONObject(jsonVaccineData);
+        this.jsonVaccineData = json.toString();
     } catch (Exception e) {
         throw new IllegalArgumentException("jsonData does not use required format");
     }
@@ -125,8 +127,8 @@ public class PermitteeRepresentations {
       serial,
       isoInstantWithMilliseconds.format(time),
       permitteeId + "",
-      imageUri,
-      jsonData
+      jsonPassport,
+      jsonVaccineData
     });
   }
 
@@ -139,8 +141,8 @@ public class PermitteeRepresentations {
       serial,
       time.toEpochMilli() + "",
       permitteeId + "",
-      imageUri,
-      jsonData
+      jsonPassport,
+      jsonVaccineData
     });  
   }  
 

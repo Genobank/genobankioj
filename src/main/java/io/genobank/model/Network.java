@@ -9,6 +9,12 @@ public enum Network {
     "https://api-test.genobank.io/",
     "0x795faFFc58648e435E3bD3196C4F75F8EFc4b306"
     ),
+  LOCAL(
+    "io.genobank.test", 
+    "http://localhost:5500/test/certificates/verify-certificate-v1.html#",
+    "https://api-test.genobank.io/",
+    "0x795faFFc58648e435E3bD3196C4F75F8EFc4b306"
+    ),
   PRODUCTION(
     "io.genobank",
     "https://genobank.io/certificates/verify-certificate-v1#",

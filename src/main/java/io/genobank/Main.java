@@ -28,7 +28,11 @@ public class Main {
         System.err.println("Network:     " + ConsoleColors.GREEN + "TEST NETWORK" + ConsoleColors.RESET);
         network = Network.TEST;
         break;
-        case "--production":
+      case "--local":
+        System.err.println("Network:     " + ConsoleColors.BLUE_BRIGHT + "TEST LOCAL" + ConsoleColors.RESET);
+        network = Network.LOCAL;
+        break;
+      case "--production":
         System.err.println("Network:     " + ConsoleColors.RED + "PRODUCTION NETWORK (BILLABLE)" + ConsoleColors.RESET);
         network = Network.PRODUCTION;
         break;
@@ -58,8 +62,8 @@ public class Main {
     System.err.println("Result:      " + ConsoleColors.YELLOW + representations.result.code + ConsoleColors.RESET);
     System.err.println("Serial:      " + ConsoleColors.YELLOW + representations.serial + ConsoleColors.RESET);
     System.err.println("Time:        " + ConsoleColors.YELLOW + representations.time.toEpochMilli() + "" + ConsoleColors.RESET);
-    System.err.println("imageUrl:     " + ConsoleColors.YELLOW + representations.imageUri + ConsoleColors.RESET);
-    System.err.println("jsonData:     " + ConsoleColors.YELLOW + representations.jsonData + ConsoleColors.RESET);
+    System.err.println("jsonPassport:     " + ConsoleColors.YELLOW + representations.jsonPassport + ConsoleColors.RESET);
+    System.err.println("jsonVaccineData:     " + ConsoleColors.YELLOW + representations.jsonVaccineData + ConsoleColors.RESET);
 
 
     byte[] signature = signer.sign(representations);
