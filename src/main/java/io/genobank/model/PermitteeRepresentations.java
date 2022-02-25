@@ -97,20 +97,21 @@ public class PermitteeRepresentations {
     this.permitteeId = permitteeId;
 
     // jsonPassport
-    try {
-        JSONObject json = new JSONObject(jsonPassport);
-        this.jsonPassport = json.toString();
-    } catch (Exception e) {
-        throw new IllegalArgumentException("jsonPassport does not use required format");
+    // create a regex that matches whit this format: {"","","","",""}
+    String regex = "\\{\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\"\\}";
+    if (!Pattern.matches(regex, jsonPassport)) {
+      throw new IllegalArgumentException("jsonPassport does not use required format");
     }
+    this.jsonPassport = jsonPassport;
 
+
+    // regex match if starts with {[ and ends with ]} and no matter how many commas there are
+    
+
+    this.jsonVaccineData = jsonVaccineData;
+    System.out.println("jsonVaccineData: " + jsonVaccineData);
     // jsonVaccineData
-    try {
-        JSONObject json = new JSONObject(jsonVaccineData);
-        this.jsonVaccineData = json.toString();
-    } catch (Exception e) {
-        throw new IllegalArgumentException("jsonData does not use required format");
-    }
+    
   }
 
   public String getFullSerialization() {
