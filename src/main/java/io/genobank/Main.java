@@ -28,7 +28,11 @@ public class Main {
         System.err.println("Network:     " + ConsoleColors.GREEN + "TEST NETWORK" + ConsoleColors.RESET);
         network = Network.TEST;
         break;
-        case "--production":
+      case "--local":
+        System.err.println("Network:     " + ConsoleColors.BLUE + "LOCAL NETWORK" + ConsoleColors.RESET);
+        network = Network.LOCAL;
+        break;
+      case "--production":
         System.err.println("Network:     " + ConsoleColors.RED + "PRODUCTION NETWORK (BILLABLE)" + ConsoleColors.RESET);
         network = Network.PRODUCTION;
         break;

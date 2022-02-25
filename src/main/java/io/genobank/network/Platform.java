@@ -32,11 +32,11 @@ public class Platform {
       "\"permitteeSerial\":" + signer.permitteeId +
       "}";
 
+    
       /*
     System.err.println("Preparing request to API server");
-    System.err.println("URL:         " + targetUrl);
+    System.err.println("URL:         " + targetUrl);*/
     System.err.println("Body:        " + requestBody);
-    */
     
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
