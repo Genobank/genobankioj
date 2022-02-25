@@ -41,9 +41,9 @@ public class PermitteeRepresentations {
 
   public final Integer permitteeId;
 
-  public final String imageUri;
+  public final String jsonPassport;
 
-  public final String jsonData;
+  public final String jsonVaccineData;
 
   public PermitteeRepresentations(
     Network network,
@@ -54,8 +54,8 @@ public class PermitteeRepresentations {
     String serial,
     java.time.Instant time,
     Integer permitteeId,
-    String imageUri,
-    String jsonData
+    String jsonPassport,
+    String jsonVaccineData
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -96,19 +96,22 @@ public class PermitteeRepresentations {
     // Permittee ID
     this.permitteeId = permitteeId;
 
-    // Image URI
-    if (!Pattern.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", imageUri)) {
-      throw new IllegalArgumentException("imageUri does not use required format");
+    // jsonPassport
+    // create a regex that matches whit this format: {"","","","",""}
+    String regex = "\\{\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\"\\}";
+    if (!Pattern.matches(regex, jsonPassport)) {
+      throw new IllegalArgumentException("jsonPassport does not use required format");
     }
-    this.imageUri = imageUri;
+    this.jsonPassport = jsonPassport;
 
-    // JSON data
-    try {
-        JSONObject json = new JSONObject(jsonData);
-        this.jsonData = json.toString();
-    } catch (Exception e) {
-        throw new IllegalArgumentException("jsonData does not use required format");
-    }
+
+    // regex match if starts with {[ and ends with ]} and no matter how many commas there are
+    
+
+    this.jsonVaccineData = jsonVaccineData;
+    System.out.println("jsonVaccineData: " + jsonVaccineData);
+    // jsonVaccineData
+    
   }
 
   public String getFullSerialization() {
@@ -125,8 +128,8 @@ public class PermitteeRepresentations {
       serial,
       isoInstantWithMilliseconds.format(time),
       permitteeId + "",
-      imageUri,
-      jsonData
+      jsonPassport,
+      jsonVaccineData
     });
   }
 
@@ -139,8 +142,8 @@ public class PermitteeRepresentations {
       serial,
       time.toEpochMilli() + "",
       permitteeId + "",
-      imageUri,
-      jsonData
+      jsonPassport,
+      jsonVaccineData
     });  
   }  
 

@@ -11,7 +11,7 @@ public enum Network {
     ),
   LOCAL(
     "io.genobank.test", 
-    "localhost:5500/test/certificates/verify-certificate-v1.html#",
+    "http://localhost:5500/test/certificates/verify-certificate-v1.html#",
     "https://api-test.genobank.io/",
     "0x795faFFc58648e435E3bD3196C4F75F8EFc4b306"
     ),

@@ -29,7 +29,7 @@ public class Main {
         network = Network.TEST;
         break;
       case "--local":
-        System.err.println("Network:     " + ConsoleColors.BLUE + "LOCAL NETWORK" + ConsoleColors.RESET);
+        System.err.println("Network:     " + ConsoleColors.BLUE_BRIGHT + "TEST LOCAL" + ConsoleColors.RESET);
         network = Network.LOCAL;
         break;
       case "--production":
@@ -62,8 +62,8 @@ public class Main {
     System.err.println("Result:      " + ConsoleColors.YELLOW + representations.result.code + ConsoleColors.RESET);
     System.err.println("Serial:      " + ConsoleColors.YELLOW + representations.serial + ConsoleColors.RESET);
     System.err.println("Time:        " + ConsoleColors.YELLOW + representations.time.toEpochMilli() + "" + ConsoleColors.RESET);
-    System.err.println("imageUrl:     " + ConsoleColors.YELLOW + representations.imageUri + ConsoleColors.RESET);
-    System.err.println("jsonData:     " + ConsoleColors.YELLOW + representations.jsonData + ConsoleColors.RESET);
+    System.err.println("jsonPassport:     " + ConsoleColors.YELLOW + representations.jsonPassport + ConsoleColors.RESET);
+    System.err.println("jsonVaccineData:     " + ConsoleColors.YELLOW + representations.jsonVaccineData + ConsoleColors.RESET);
 
 
     byte[] signature = signer.sign(representations);
