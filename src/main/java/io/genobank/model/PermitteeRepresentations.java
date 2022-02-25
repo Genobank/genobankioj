@@ -97,17 +97,18 @@ public class PermitteeRepresentations {
     this.permitteeId = permitteeId;
 
     // jsonPassport
-    // create a regex that matches whit this format: {"","","","",""}
-    String regex = "\\{\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\",\"[A-Za-z0-9 .-]+\"\\}";
+    String regex = "^\\{.*\\}$";
     if (!Pattern.matches(regex, jsonPassport)) {
       throw new IllegalArgumentException("jsonPassport does not use required format");
     }
     this.jsonPassport = jsonPassport;
 
-
-    // regex match if starts with {[ and ends with ]} and no matter how many commas there are
+    // create regex that matches whit start whith [{ and end with }] can contain any character
+    String regex2 = "^\\[\\{.*\\}\\]$";
+    if (!Pattern.matches(regex2, jsonVaccineData)) {
+        throw new IllegalArgumentException("jsonVaccineData does not use required format");
+    }
     
-
     this.jsonVaccineData = jsonVaccineData;
     System.out.println("jsonVaccineData: " + jsonVaccineData);
     // jsonVaccineData
