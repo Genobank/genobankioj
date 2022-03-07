@@ -45,6 +45,8 @@ public class PermitteeRepresentations {
 
   public final String jsonVaccineData;
 
+  public final String jsonCovidTest;
+
   public PermitteeRepresentations(
     Network network,
     String patientName,
@@ -55,7 +57,8 @@ public class PermitteeRepresentations {
     java.time.Instant time,
     Integer permitteeId,
     String jsonPassport,
-    String jsonVaccineData
+    String jsonVaccineData,
+    String jsonCovidTest
   ) throws IllegalArgumentException {
     // Network
     java.util.Objects.requireNonNull(network);
@@ -113,6 +116,12 @@ public class PermitteeRepresentations {
     System.out.println("jsonVaccineData: " + jsonVaccineData);
     // jsonVaccineData
     
+    // jsonCovidTest
+
+    if (!Pattern.matches(regex, jsonCovidTest)) {
+      throw new IllegalArgumentException("jsonPassport does not use required format");
+    }
+    this.jsonCovidTest = jsonCovidTest;
   }
 
   public String getFullSerialization() {
@@ -130,7 +139,8 @@ public class PermitteeRepresentations {
       isoInstantWithMilliseconds.format(time),
       permitteeId + "",
       jsonPassport,
-      jsonVaccineData
+      jsonVaccineData,
+      jsonCovidTest
     });
   }
 
@@ -144,7 +154,8 @@ public class PermitteeRepresentations {
       time.toEpochMilli() + "",
       permitteeId + "",
       jsonPassport,
-      jsonVaccineData
+      jsonVaccineData,
+      jsonCovidTest
     });  
   }  
 
