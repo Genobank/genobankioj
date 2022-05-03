@@ -12,9 +12,27 @@ import org.web3j.crypto.Keys;
  */
 public class Main {
   public static void main(String[] args) throws IllegalArgumentException {    
-    if (args.length != 12) {
+    if (args.length < 11 || args.length > 12) {
       showHelp();
       return;
+    }
+
+    if (args.length == 11) {
+        // add new element to args
+        args = new String[] {
+            args[0],
+            args[1],
+            args[2],
+            args[3],
+            args[4],
+            args[5],
+            args[6],
+            args[7],
+            args[8],
+            args[9],
+            args[10],
+            ""
+        };
     }
     
     System.err.println("Blockchain Lab Results Certification");

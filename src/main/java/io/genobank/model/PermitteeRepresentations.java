@@ -106,22 +106,22 @@ public class PermitteeRepresentations {
     }
     this.jsonPassport = jsonPassport;
 
-    // create regex that matches whit start whith [{ and end with }] can contain any character
+    // jsonVaccineData
     String regex2 = "^\\[\\{.*\\}\\]$";
     if (!Pattern.matches(regex2, jsonVaccineData)) {
         throw new IllegalArgumentException("jsonVaccineData does not use required format");
     }
-    
     this.jsonVaccineData = jsonVaccineData;
-    System.out.println("jsonVaccineData: " + jsonVaccineData);
-    // jsonVaccineData
-    
-    // jsonCovidTest
 
-    if (!Pattern.matches(regex, jsonCovidTest)) {
-      throw new IllegalArgumentException("jsonPassport does not use required format");
+    // jsonCovidTest
+    if (!jsonCovidTest.isEmpty()) {
+        if (!Pattern.matches(regex, jsonCovidTest)) {
+            throw new IllegalArgumentException("jsonCovidTest does not use required format");
+        }
+        this.jsonCovidTest = jsonCovidTest;
+    } else {
+        this.jsonCovidTest = "";
     }
-    this.jsonCovidTest = jsonCovidTest;
   }
 
   public String getFullSerialization() {

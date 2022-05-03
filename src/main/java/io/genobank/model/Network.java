@@ -5,7 +5,7 @@ import java.net.URI;
 public enum Network {
   TEST(
     "io.genobank.test", 
-    "https://genobank.io/test/certificates/verify-certificate-v1#",
+    "https://genobank.io/test/certificates/verify-certificate-v1.1#",
     "https://api-test.genobank.io/",
     "0x795faFFc58648e435E3bD3196C4F75F8EFc4b306"
     ),
